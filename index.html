@@ -77,10 +77,10 @@
     function checkout(price, mode) {
         stripe.redirectToCheckout({
             lineItems: [{
-                price: 'prod_JIIV3ze0cEN7vi',
+                price: price,
                 quantity: 1,
             }],
-            mode: 'payment',
+            mode: mode,
             successUrl: 'https://example.com/success',
             cancelUrl: 'https://example.com/cancel',
         }).then(function (result) {
