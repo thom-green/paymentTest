@@ -3,22 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <title>Stripe Test</title>
+    <style>
+        .card {
+            margin: 4rem;
+        }
+
+        .orElement {
+            display: inline-block;
+            padding: 0 1rem;;
+        }
+
+    </style>
 </head>
 <body>
-    <button onclick="checkout()">Checkout</button>
+    <div class="container">
+      <div class="card">
+        <div class="card-body">
+        <h2>Player Membership & Subscription</h2>
+        <br/ >
+          <h5 class="card-title">Membership option</h5>
+          <p class="card-text">Every player is required to pay BOTH a membership fee and subscriptions.</p>
+          <div class="row">
+            <div class="col">Annual Membership - One player</div>
+            <div class="col">    <button type="button" class="btn btn-success" onclick="checkout('price_1IfhtdBanvVoUf1AVHIC7SvM','payment')">£25</button></div>
+          </div>
+          <div class="row"><br /></div>
+          <div class="row">
+              <div class="col">Annual Membership – Second & Subsequent Family Players</div>
+              <div class="col">    <button type="button" class="btn btn-success" onclick="checkout('price_1IfhuOBanvVoUf1AGp6q4Mb3','payment')">£12.50</button></div>
+          </div>
+          <br />
+          <h5 class="card-title">Subscription option</h5>
+            <div class="row">
+                <div class="col">Single Player Subscription</div>
+                <div class="col">
+                    <button type="button" class="btn btn-success" onclick="checkout('price_1IfhnSBanvVoUf1A6L855I2B','payment')">£220</button>
+                    <p class="orElement">OR</p>
+                    <button type="button" class="btn btn-success" onclick="checkout('price_1IfhnSBanvVoUf1A6L855I2B','subscription')">£20.00 / month</button>
+                </div>
+            </div>
+            <div class="row"><br /></div>
+            <div class="row">
+                <div class="col">Second & Subsequent Family Player Subscription</div>
+                <div class="col">
+                    <button type="button" class="btn btn-success" onclick="checkout('price_1Ifhp1BanvVoUf1AlYCQqFFd','payment')">£120</button>
+                    <p class="orElement">OR</p>
+                    <button type="button" class="btn btn-success" onclick="checkout('price_1Ifhp1BanvVoUf1AlYCQqFFd','subscription')">£10.00 / month</button>
+                </div>
+            </div>
+            <div class="row"><br /></div>
+            <div class="row">
+                <div class="col">Girl Team Player Only Subscription</div>
+                <div class="col">
+                    <button type="button" class="btn btn-success" onclick="checkout('price_1IfhrxBanvVoUf1AOW1T283l','payment')">£120</button>
+                    <p class="orElement">OR</p>
+                    <button type="button" class="btn btn-success" onclick="checkout('price_1IfhrxBanvVoUf1AOW1T283l','subscription')">£10.00 / month</button>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
 </body>
 <script>
     var stripe = Stripe('pk_test_51IfhJBBanvVoUf1AebDkzLZci2nWP815N1HxuYjjlBWAmIbtxcXVJjwZLgpJo4tshp5oWEcTRissk2Pe42SnnHIR00MqgCZzuC');
 
-    function checkout() {
+    function checkout(price, mode) {
         stripe.redirectToCheckout({
             lineItems: [{
-                price: 'price_1IfhnSBanvVoUf1A6L855I2B',
+                price: 'prod_JIIV3ze0cEN7vi',
                 quantity: 1,
             }],
-            mode: 'subscription',
+            mode: 'payment',
             successUrl: 'https://example.com/success',
             cancelUrl: 'https://example.com/cancel',
         }).then(function (result) {
