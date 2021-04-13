@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://js.stripe.com/v3/"></script>
+    <title>Stripe Test</title>
+</head>
+<body>
+    <button onclick="checkout()">Checkout</button>
+</body>
+<script>
+    var stripe = Stripe('pk_test_51IfhJBBanvVoUf1AebDkzLZci2nWP815N1HxuYjjlBWAmIbtxcXVJjwZLgpJo4tshp5oWEcTRissk2Pe42SnnHIR00MqgCZzuC');
+
+    function checkout() {
+        stripe.redirectToCheckout({
+            lineItems: [{
+                price: 'prod_JIIV3ze0cEN7vi',
+                quantity: 1,
+            }],
+            mode: 'payment',
+            successUrl: 'https://example.com/success',
+            cancelUrl: 'https://example.com/cancel',
+        }).then(function (result) {
+            console.log(result);
+        });
+    }
+
+</script>
+</html>
