@@ -19,11 +19,19 @@
             padding: 0 1rem;;
         }
 
+        #paymentContainer, #confirmedContainer {
+            display: none;
+        }
+
+        #confirmedContainer > .card-body {
+            text-align: center;
+        }
+
     </style>
 </head>
 <body>
     <div class="container">
-      <div class="card">
+      <div class="card" id="paymentContainer">
         <div class="card-body">
         <h2>Player Membership & Subscription</h2>
         <br/ >
@@ -68,10 +76,29 @@
             </div>
         </div>
       </div>
+
+      <div class="card" id="confirmedContainer">
+        <div class="card-body">
+        <h2>Payment complete</h2>
+        <p>Thank you for your purchase</p>
+      </div>
     </div>
 
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
+
+    $(window).on('load', function () {
+
+        if ( document.location.href.indexOf('success_id') > -1 ) {
+            $('#confirmedContainer').show();
+        }
+        else{
+            $('#paymentContainer').show();
+        }
+    });
+
+
     var stripe = Stripe('pk_test_51IfhJBBanvVoUf1AebDkzLZci2nWP815N1HxuYjjlBWAmIbtxcXVJjwZLgpJo4tshp5oWEcTRissk2Pe42SnnHIR00MqgCZzuC');
 
     function checkout(price, mode) {
