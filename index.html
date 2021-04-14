@@ -81,7 +81,7 @@
                 quantity: 1,
             }],
             mode: mode,
-            successUrl: 'https://paymenttest.netlify.app/success_id=' + uuidv4(),
+            successUrl: 'https://paymenttest.netlify.app?success_id=' + uuidv4(),
             cancelUrl: 'https://paymenttest.netlify.app',
         }).then(function (result) {
             console.log(result);
