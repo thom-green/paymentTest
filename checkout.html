@@ -50,7 +50,7 @@
                 quantity: 1,
             }],
             mode: urlParams.type,
-            successUrl: 'https://paymenttest.netlify.app?success_id=' + uuidv4(),
+            successUrl: 'https://paymenttest.netlify.app?success_id=' + uuidv4() + '&product=' + urlParams.product + '&type=' + urlParams.type,
             cancelUrl: 'https://paymenttest.netlify.app',
         }).then(function (result) {
             console.log(result);
