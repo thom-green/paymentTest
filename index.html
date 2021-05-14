@@ -128,7 +128,8 @@
         <div class="card" id="confirmedContainer">
             <div class="card-body">
                 <h2>Payment complete</h2>
-                <p>Thank you for your purchase</p>
+                <p>Thank you for your purchasing <span id="productPurchased"></span></p>
+                <p>You can now close this window and return to the player registration form</p>
             </div>
         </div>
     </div>
@@ -172,10 +173,11 @@
     $(window).on('load', function () {
 
         if (document.location.href.indexOf('success_id') > -1) {
-            $('#confirmedContainer').show();
             localStorage.setItem('orderId', urlParams.success_id);
             localStorage.setItem('productPurchased', urlParams.product);
             localStorage.setItem('productType', urlParams.type);
+            populatePurchasedProduct(urlParams.product);
+            $('#confirmedContainer').show();
         }
         else {
             $('#paymentContainer').show();
@@ -186,6 +188,20 @@
         $('#itemsInBasket').append('<li>' + option + '<span class="basketPrice">' + price + '</span></li>');
         $('#AnnualMembershipOnePlayerBtn').prop('disabled', true);
         $('#AnnualMembershipSecondSubsequentFamilyPlayersBtn').prop('disabled', true);
+    }
+
+    function populatePurchasedProduct(productType) {
+        switch (productType) {
+            case 'price_1IfhtdBanvVoUf1AVHIC7SvM':
+                $('#productPurchased').text('Annual Membership - One player')
+                break;
+            case 'price_1IfhuOBanvVoUf1AGp6q4Mb3':
+                $('#productPurchased').text('Annual Membership – Second & Subsequent Family Player')
+                break;
+
+            default:
+                break;
+        }
     }
 
     // $('#checkoutBtn').click(function () {
