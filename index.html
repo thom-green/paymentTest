@@ -123,8 +123,8 @@
         var stripeResponse = localStorage.getItem('productPurchased');
         if (stripeResponse != null) {
             clearInterval(timer);
-            var product = localStorage.get(productPurchased);
-            var productType = localStorage.get(productType);
+            var product = localStorage.getItem(productPurchased);
+            var productType = localStorage.getItem(productType);
             populatePurchasedProduct(urlParams.product, '#StripePurchased');
             $('#paymentContainer').hide();
             $('#stripeResponseContainer').show();
