@@ -181,7 +181,7 @@
     });
 
     function setCookie(key, value) {
-        var cookieSet = $.cookie(key, value)
+        document.cookie = key + "=" + value + "; expires=Thu, 25 Dec 2022 12:00:00 UTC; path=/";
     }
 
     function addToBasket(option, price) {
