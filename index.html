@@ -147,11 +147,35 @@
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
 
+    let urlParams = {};
+    (window.onpopstate = function () {
+        let match,
+            pl = /\+/g,  // Regex for replacing addition symbol with a space
+            search = /([^&=]+)=?([^&]*)/g,
+            decode = function (s) {
+                return decodeURIComponent(s.replace(pl, " "));
+            },
+            query = window.location.search.substring(1);
+
+        while (match = search.exec(query)) {
+            if (decode(match[1]) in urlParams) {
+                if (!Array.isArray(urlParams[decode(match[1])])) {
+                    urlParams[decode(match[1])] = [urlParams[decode(match[1])]];
+                }
+                urlParams[decode(match[1])].push(decode(match[2]));
+            } else {
+                urlParams[decode(match[1])] = decode(match[2]);
+            }
+        }
+    })();
+
     $(window).on('load', function () {
 
         if (document.location.href.indexOf('success_id') > -1) {
             $('#confirmedContainer').show();
-            localStorage.setItem('orderComplete', 'test');
+            localStorage.setItem('orderId', urlParams.success_id);
+            localStorage.setItem('productPurchased', urlParams.product);
+            localStorage.setItem('productType', urlParams.type);
         }
         else {
             $('#paymentContainer').show();
