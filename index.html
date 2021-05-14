@@ -111,6 +111,7 @@
     function checkForPurchase() {
         var stripeResponse = localStorage.getItem('productPurchased');
         if (stripeResponse != null) {
+            clearInterval(timer);
             console.log('Have purchase');
         }
     }
