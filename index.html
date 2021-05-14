@@ -165,6 +165,10 @@
     $(window).on('load', function () {
 
         if (document.location.href.indexOf('success_id') > -1) {
+            setCookie('orderId', urlParams.success_id)
+            setCookie('productPurchased', urlParams.product)
+            setCookie('productType', urlParams.type)
+
             localStorage.setItem('orderId', urlParams.success_id);
             localStorage.setItem('productPurchased', urlParams.product);
             localStorage.setItem('productType', urlParams.type);
@@ -175,6 +179,10 @@
             $('#paymentContainer').show();
         }
     });
+
+    function setCookie(key, value) {
+        var cookieSet = $.cookie(key, value)
+    }
 
     function addToBasket(option, price) {
         $('#itemsInBasket').append('<li>' + option + '<span class="basketPrice">' + price + '</span></li>');
