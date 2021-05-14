@@ -98,15 +98,14 @@
         <div class="card" id="confirmedContainer">
             <div class="card-body">
                 <h2>Payment complete</h2>
-                <p>Thank you for purchasing <span id="productPurchased"></span></p>
+                <p>Thank you for purchasing <span class="productPurchased"></span></p>
                 <p>You can now close this window and return to the player registration form</p>
             </div>
         </div>
         <div class="card" id="stripeResponseContainer">
             <div class="card-body">
                 <h2>Payment complete</h2>
-                <h5 class="card-title">Player Membership and Subscription options</h5>
-                <p>Thank you for purchasing <span id="StripePurchased"></span></p>
+                <p>Thank you for purchasing <span class="productPurchased"></span></p>
                 <div class="col">
                     <button type="button" class="btn btn-success">Next</button>
                 </div>
@@ -120,6 +119,9 @@
 
     var timer = setInterval(checkForPurchase, 1000);
     function checkForPurchase() {
+
+        console.log('checking');
+
         var stripeResponse = localStorage.getItem('productPurchased');
         if (stripeResponse != null) {
             clearInterval(timer);
@@ -183,22 +185,22 @@
     function populatePurchasedProduct(productType, dest) {
         switch (productType) {
             case 'price_1IfhnSBanvVoUf1AgXxYOeGK':
-                $(dest).text('Annual Membership - One player (£220 single payment)')
+                $('.productPurchased').text('Annual Membership - One player (£220 single payment)')
                 break;
             case 'price_1IfhnSBanvVoUf1A6L855I2B':
-                $(dest).text('Annual Membership - One player (£20/mo subscription)')
+                $('.productPurchased').text('Annual Membership - One player (£20/mo subscription)')
                 break;
             case 'price_1Ifhp1BanvVoUf1AyAP1Vxm0':
-                $(dest).text('Second & Subsequent Family Player Membership & Subscription (£120 single payment)')
+                $('.productPurchased').text('Second & Subsequent Family Player Membership & Subscription (£120 single payment)')
                 break;
             case 'price_1Ifhp1BanvVoUf1AlYCQqFFd':
-                $(dest).text('Second & Subsequent Family Player Membership & Subscription (£10/mo subscription)')
+                $('.productPurchased').text('Second & Subsequent Family Player Membership & Subscription (£10/mo subscription)')
                 break;
             case 'price_1IfhrxBanvVoUf1A03jUQS4s':
-                $(dest).text('Girl Team Player Only Membership & Subscription (£120 single payment)')
+                $('.productPurchased').text('Girl Team Player Only Membership & Subscription (£120 single payment)')
                 break;
             case 'price_1IfhrxBanvVoUf1AOW1T283l':
-                $(dest).text('Girl Team Player Only Membership & Subscription (£10/mo subscription)')
+                $('.productPurchased').text('Girl Team Player Only Membership & Subscription (£10/mo subscription)')
                 break;
 
             default:
