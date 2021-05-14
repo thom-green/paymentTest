@@ -57,41 +57,10 @@
         <div class="card" id="paymentContainer">
             <div class="card-body">
                 <h2>Player Membership & Subscription</h2>
-                <br />
-                <h5 class="card-title">Membership option</h5>
-                <p class="card-text">Every player is required to pay BOTH a membership fee and subscriptions.</p>
+                <br>
+                <h5 class="card-title">Player Membership and Subscription options</h5>
                 <div class="row">
-                    <div class="col">Annual Membership - One player</div>
-                    <div class="col">
-                        <button type="button" class="btn btn-success"
-                            onclick="checkout('price_1IfhtdBanvVoUf1AVHIC7SvM','payment')">
-                            £25
-                        </button>
-                        <!-- <button type="button" class="btn btn-success" id="AnnualMembershipOnePlayerBtn"
-                            onclick="addToBasket('Annual Membership - One player', '£25.00')">
-                            £25
-                        </button> -->
-                    </div>
-                </div>
-                <div class="row"><br /></div>
-                <div class="row">
-                    <div class="col">Annual Membership – Second & Subsequent Family Players</div>
-                    <div class="col">
-                        <button type="button" class="btn btn-success"
-                            onclick="checkout('price_1IfhuOBanvVoUf1AGp6q4Mb3','payment')">
-                            £12.50
-                        </button>
-                        <!-- <button type="button" class="btn btn-success"
-                            id="AnnualMembershipSecondSubsequentFamilyPlayersBtn"
-                            onclick="addToBasket('Annual Membership – Second & Subsequent Family Players','£12.50')">
-                            £12.50
-                        </button> -->
-                    </div>
-                </div>
-                <br />
-                <h5 class="card-title">Subscription option</h5>
-                <div class="row">
-                    <div class="col">Single Player Subscription</div>
+                    <div class="col">Single Player Membership & Subscription</div>
                     <div class="col">
                         <button type="button" class="btn btn-success"
                             onclick="checkout('price_1IfhnSBanvVoUf1AgXxYOeGK','payment')">£220</button>
@@ -102,7 +71,7 @@
                 </div>
                 <div class="row"><br /></div>
                 <div class="row">
-                    <div class="col">Second & Subsequent Family Player Subscription</div>
+                    <div class="col">Second & Subsequent Family Player Membership & Subscription</div>
                     <div class="col">
                         <button type="button" class="btn btn-success"
                             onclick="checkout('price_1Ifhp1BanvVoUf1AyAP1Vxm0','payment')">£120</button>
@@ -113,7 +82,7 @@
                 </div>
                 <div class="row"><br /></div>
                 <div class="row">
-                    <div class="col">Girl Team Player Only Subscription</div>
+                    <div class="col">Girl Team Player Only Membership & Subscription</div>
                     <div class="col">
                         <button type="button" class="btn btn-success"
                             onclick="checkout('price_1IfhrxBanvVoUf1A03jUQS4s','payment')">£120</button>
@@ -133,24 +102,24 @@
             </div>
         </div>
     </div>
-    <!-- <div class="container">
-        <div class="card">
-            <div class="card-body">
-                <h2>Basket</h2>
-                <ul id="itemsInBasket">
-                </ul>
-                <button class="btn btn-success" id="checkoutBtn">Check out</button>
-            </div>
-        </div>
-    </div> -->
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
 
-    let urlParams = {};
+    var timer = setInterval(checkForPurchase, 1000);
+    function checkForPurchase() {
+        var stripeResponse = localStorage.getItem('productPurchased');
+        if (stripeResponse != null) {
+            console.log('Have purchase');
+        }
+    }
+
+
+
+    var urlParams = {};
     (window.onpopstate = function () {
-        let match,
+        var match,
             pl = /\+/g,  // Regex for replacing addition symbol with a space
             search = /([^&=]+)=?([^&]*)/g,
             decode = function (s) {
@@ -204,38 +173,10 @@
         }
     }
 
-    // $('#checkoutBtn').click(function () {
-    //     window.open("checkout.html?product=price_1IfhtdBanvVoUf1AVHIC7SvM,price_1IfhtdBanvVoUf1AVHIC7SvM&type=payment", "PopupWindow", "width=600,height=600,scrollbars=yes,resizable=no");
-    // });
-
-
-    // var stripe = Stripe('pk_test_51IfhJBBanvVoUf1AebDkzLZci2nWP815N1HxuYjjlBWAmIbtxcXVJjwZLgpJo4tshp5oWEcTRissk2Pe42SnnHIR00MqgCZzuC');
-
     function checkout(price, mode) {
 
         window.open("checkout.html?product=" + price + "&type=" + mode + "", "PopupWindow", "width=600,height=600,scrollbars=yes,resizable=no");
-
-
-        // stripe.redirectToCheckout({
-        //     lineItems: [{
-        //         price: price,
-        //         quantity: 1,
-        //     }],
-        //     mode: mode,
-        //     successUrl: 'https://paymenttest.netlify.app?success_id=' + uuidv4(),
-        //     cancelUrl: 'https://paymenttest.netlify.app',
-        // }).then(function (result) {
-        //     console.log(result);
-        // });
     }
-
-    // function uuidv4() {
-    //     return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
-    //         (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-    //     );
-    // }
-
-    // console.log(uuidv4());
 
 </script>
 
