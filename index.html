@@ -126,11 +126,13 @@
             var product = localStorage.getItem(productPurchased);
             var productType = localStorage.getItem(productType);
             populatePurchasedProduct(urlParams.product, '#StripePurchased');
-            $('#paymentContainer').hide();
-            $('#stripeResponseContainer').show();
-            localStorage.removeItem(productPurchased);
-            localStorage.removeItem(productType);
-            localStorage.removeItem(orderId);
+            if ($('#paymentContainer').is(":visible")) {
+                $('#stripeResponseContainer').show();
+                $('#paymentContainer').hide();
+            }
+            localStorage.removeItem('productPurchased');
+            localStorage.removeItem('productType');
+            localStorage.removeItem('orderId');
         }
     }
 
